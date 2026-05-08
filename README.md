@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pet Adoption System (Django)
 
 A simple, professionally structured Django project implementing an **MVC-style** architecture with a **Service Layer**.
@@ -243,3 +244,6 @@ This will:
 - Generate a new SECRET_KEY for production
 - Set DEBUG=False in production
 
+=======
+# PetAdoption
+>>>>>>> fd7e45fab5e9c509061394b2cb69dbfcdb4b7fe5
