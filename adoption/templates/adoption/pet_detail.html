@@ -1,0 +1,99 @@
+{% extends 'adoption/app_base.html' %}
+
+{% block title %}{{ pet.name }} | Pet Adoption{% endblock %}
+
+{% block content %}
+  <div class="mb-3">
+    <a class="text-decoration-none" href="{% url 'pet_list' %}">
+      <i class="bi bi-arrow-left me-1"></i>Back to pets
+    </a>
+  </div>
+
+  <div class="card border-0 shadow-sm overflow-hidden">
+    <div class="row g-0">
+      <div class="col-12 col-lg-5">
+        <img
+          class="img-fluid w-100 pet-detail-img"
+          src="{% if pet.image %}{{ pet.image }}{% else %}https://placehold.co/1200x900/png?text=Pet+Photo{% endif %}"
+          alt="{{ pet.name }}"
+        />
+      </div>
+      <div class="col-12 col-lg-7">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-start justify-content-between gap-3">
+            <div>
+              <h1 class="h3 mb-1">{{ pet.name }}</h1>
+              <div class="text-muted">
+                <span class="me-3"><i class="bi bi-stars me-1"></i>{{ pet.species }}</span>
+                <span><i class="bi bi-tag me-1"></i>{{ pet.breed|default:"Mixed" }}</span>
+              </div>
+            </div>
+            <span class="badge {% if pet.status == 'available' %}text-bg-success{% else %}text-bg-secondary{% endif %}">
+              {{ pet.get_status_display }}
+            </span>
+          </div>
+
+          <hr class="my-3" />
+
+          <div class="row g-3">
+            <div class="col-12 col-md-4">
+              <div class="p-3 rounded-3 bg-light">
+                <div class="text-muted small">Age</div>
+                <div class="fw-semibold"><i class="bi bi-calendar3 me-1"></i>{{ pet.age }} years</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-8">
+              <div class="p-3 rounded-3 bg-light h-100">
+                <div class="text-muted small">About</div>
+                <div class="fw-normal">{{ pet.description|default:"A lovely pet looking for a new home." }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <a class="btn btn-outline-secondary" href="{% url 'pet_update' pet.id %}">
+              <i class="bi bi-pencil-square me-1"></i>Edit
+            </a>
+            <form method="post" action="{% url 'pet_delete' pet.id %}" class="d-inline">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger" type="submit">
+                <i class="bi bi-trash me-1"></i>Delete
+              </button>
+            </form>
+          </div>
+
+          {% if pet.status == 'available' %}
+            <div class="mt-4">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-house-heart text-primary fs-5"></i>
+                <h2 class="h5 mb-0">Adopt {{ pet.name }}</h2>
+              </div>
+              <p class="text-muted mb-3">Submit your details to start the adoption.</p>
+              <form method="post" action="{% url 'adopt_pet' pet.id %}" class="row g-2">
+                {% csrf_token %}
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="adopter_name">Name</label>
+                  <input class="form-control" id="adopter_name" name="adopter_name" placeholder="Your full name" required />
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="adopter_email">Email</label>
+                  <input class="form-control" id="adopter_email" name="adopter_email" type="email" placeholder="you@example.com" required />
+                </div>
+                <div class="col-12 d-grid d-md-flex justify-content-md-end mt-2">
+                  <button class="btn btn-primary btn-lg" type="submit">
+                    <i class="bi bi-check2-circle me-1"></i>Adopt Me
+                  </button>
+                </div>
+              </form>
+            </div>
+          {% else %}
+            <div class="alert alert-secondary border-0 mt-4 mb-0">
+              <i class="bi bi-heart-fill me-1"></i>This pet has already been adopted.
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

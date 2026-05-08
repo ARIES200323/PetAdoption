@@ -1,0 +1,25 @@
+{% extends 'adoption/app_base.html' %}
+
+{% block title %}Adoption Success | Pet Adoption{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-7">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5 text-center">
+          <div class="success-badge mx-auto mb-3">
+            <i class="bi bi-heart-fill"></i>
+          </div>
+          <h1 class="h3 mb-2">Thank you for adopting!</h1>
+          <p class="text-muted mb-4">
+            This pet now has a new home. We appreciate your kindness.
+          </p>
+          <a class="btn btn-primary btn-lg" href="{% url 'pet_list' %}">
+            <i class="bi bi-grid-3x3-gap me-1"></i>Back to available pets
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

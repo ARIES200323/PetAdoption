@@ -1,0 +1,80 @@
+{% extends "adoption/app_base.html" %}
+
+{% block title %}Settings | Pet Adoption{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+          <h1 class="h3 mb-5">Settings</h1>
+
+          <div class="settings-section mb-5">
+            <h2 class="h5 mb-4" style="color: #8b7355;">Account Settings</h2>
+            <div class="card bg-light border-0 p-4">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Username</label>
+                  <input type="text" class="form-control" value="{{ request.user.username }}" disabled>
+                  <small class="text-muted">Your username cannot be changed</small>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" value="{{ request.user.email|default:'Not set' }}" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section mb-5">
+            <h2 class="h5 mb-4" style="color: #8b7355;">Preferences</h2>
+            <div class="card bg-light border-0 p-4">
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="notif" checked>
+                <label class="form-check-label" for="notif">
+                  <strong>Enable Notifications</strong>
+                  <div class="small text-muted">Receive updates about adoption requests and new pets</div>
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="stats" checked>
+                <label class="form-check-label" for="stats">
+                  <strong>Share Statistics</strong>
+                  <div class="small text-muted">Help us improve by sharing usage data</div>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="newsletter">
+                <label class="form-check-label" for="newsletter">
+                  <strong>Subscribe to Newsletter</strong>
+                  <div class="small text-muted">Get monthly updates and stories about successful adoptions</div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section mb-5">
+            <h2 class="h5 mb-4" style="color: #8b7355;">Security</h2>
+            <div class="card bg-light border-0 p-4">
+              <button class="btn btn-outline-primary" disabled>
+                <i class="bi bi-lock me-2"></i>Change Password
+              </button>
+              <small class="text-muted d-block mt-2">Update your password to keep your account secure</small>
+            </div>
+          </div>
+
+          <div class="alert alert-info border-0" role="alert">
+            <i class="bi bi-info-circle me-2"></i>
+            <strong>Note:</strong> More settings options coming soon. For now, you can manage your account from here.
+          </div>
+
+          <button class="btn btn-primary" onclick="this.disabled=true;this.innerText='Settings Saved!';setTimeout(() => location.reload(), 1500)">
+            <i class="bi bi-check-lg me-2"></i>Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

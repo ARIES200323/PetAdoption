@@ -1,0 +1,67 @@
+{% extends 'adoption/app_base.html' %}
+
+{% block title %}{% if pet %}Edit Pet{% else %}Add Pet{% endif %} | Pet Adoption{% endblock %}
+
+{% block content %}
+  <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+    <div>
+      <h1 class="h3 mb-1">{% if pet %}Edit Pet{% else %}Add a Pet{% endif %}</h1>
+      <p class="text-muted mb-0">Keep details simple and clear.</p>
+    </div>
+    <a class="btn btn-outline-secondary" href="{% url 'pet_list' %}">
+      <i class="bi bi-arrow-left me-1"></i>Back
+    </a>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      <form method="post" class="row g-3">
+        {% csrf_token %}
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-control" id="name" name="name" value="{% if pet %}{{ pet.name }}{% endif %}" required />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="species">Species</label>
+          <input class="form-control" id="species" name="species" value="{% if pet %}{{ pet.species }}{% endif %}" required />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="breed">Breed</label>
+          <input class="form-control" id="breed" name="breed" value="{% if pet %}{{ pet.breed }}{% endif %}" />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="age">Age (years)</label>
+          <input class="form-control" id="age" name="age" type="number" min="0" value="{% if pet %}{{ pet.age }}{% else %}0{% endif %}" required />
+        </div>
+        <div class="col-12">
+          <label class="form-label" for="description">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="4">{% if pet %}{{ pet.description }}{% endif %}</textarea>
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="status">Status</label>
+          <select class="form-select" id="status" name="status">
+            {% for value,label in status_choices %}
+              <option value="{{ value }}" {% if pet and pet.status == value %}selected{% endif %}>
+                {{ label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="image">Image URL</label>
+          <input class="form-control" id="image" name="image" value="{% if pet %}{{ pet.image }}{% endif %}" placeholder="https://..." />
+        </div>
+
+        <div class="col-12 d-grid d-md-flex justify-content-md-end gap-2 mt-2">
+          {% if pet %}
+            <a class="btn btn-outline-secondary" href="{% url 'pet_detail' pet.id %}">Cancel</a>
+          {% endif %}
+          <button class="btn btn-primary btn-lg" type="submit">
+            <i class="bi bi-save2 me-1"></i>Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

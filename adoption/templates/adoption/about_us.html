@@ -1,0 +1,74 @@
+{% extends "adoption/app_base.html" %}
+
+{% block title %}About Us | Pet Adoption{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-5">
+          <h1 class="h3 mb-4">About Pet Adoption System</h1>
+          
+          <section class="mb-5">
+            <h2 class="h5 mb-3" style="color: #8b7355;">Our Mission</h2>
+            <p class="text-muted">
+              We are dedicated to connecting loving homes with animals in need. Our mission is to simplify the pet adoption process 
+              and ensure that every pet finds their perfect forever home. We believe every animal deserves care, love, and a safe environment.
+            </p>
+          </section>
+
+          <section class="mb-5">
+            <h2 class="h5 mb-3" style="color: #8b7355;">What We Do</h2>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="bi bi-check-circle text-success me-2"></i>
+                <strong>Pet Management:</strong> Track and manage available pets in our system
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-check-circle text-success me-2"></i>
+                <strong>Adoption Tracking:</strong> Monitor adoption requests and ensure smooth transitions
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-check-circle text-success me-2"></i>
+                <strong>Community Building:</strong> Create a network of pet lovers and advocates
+              </li>
+            </ul>
+          </section>
+
+          <section class="mb-5">
+            <h2 class="h5 mb-3" style="color: #8b7355;">Our Values</h2>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded">
+                  <i class="bi bi-heart text-danger"></i>
+                  <h6 class="mt-2">Compassion</h6>
+                  <p class="small text-muted mb-0">We care deeply for every animal and their wellbeing.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded">
+                  <i class="bi bi-shield-check text-primary"></i>
+                  <h6 class="mt-2">Responsibility</h6>
+                  <p class="small text-muted mb-0">We ensure ethical and responsible pet adoption.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="h5 mb-3" style="color: #8b7355;">Get Involved</h2>
+            <p class="text-muted">
+              Whether you're looking to adopt, foster, or simply support our mission, there are many ways to help. 
+              Browse our available pets, add animals to our system, and become part of our growing community of animal lovers.
+            </p>
+            <a href="{% url 'pet_list' %}" class="btn btn-primary">
+              <i class="bi bi-paw me-2"></i>Browse Pets
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
